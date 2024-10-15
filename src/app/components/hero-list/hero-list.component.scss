@@ -1,0 +1,93 @@
+.hero-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px;
+    flex-direction: column;
+  
+    .hero-card {
+      margin: 10px;
+      width: 300px;
+      border-radius: 16px;
+      border: 2px solid #ffffff;
+      background-color: #030303;
+      color: white;
+    
+      
+      @media (max-width: 600px) {
+        width: 90%;
+      }
+  
+      img {
+        height: 200px;
+        object-fit: cover;
+        display: flex;
+        margin: 20px 0px;
+        width: 100%;
+      }
+    }
+    .loading-indicator {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100px;
+      margin: 180px 10px;
+    
+    }
+    
+    .cards{
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+      justify-content: space-between;
+      margin-top: 30px;
+    }
+
+    .contentButtonsSearchAdd{
+      display: flex;
+      width: 100%; 
+      justify-content: space-between;
+      .buttonSearch{
+        width: 48%;
+        border: 2px solid white;
+      }
+      .buttonAdd{
+        width: 48%;
+        background-color: black;
+        border: 2px solid white;
+      }
+    }
+
+    .paginator {
+      background-color: #cfd0d5;
+      margin-top: 12px;
+      border: 2px solid black;
+    }
+
+    .content-buttons{
+      display: flex;
+      width: 60%;
+      justify-content: flex-start;
+      align-items: center;
+
+      .edit{
+        background-color: #3f51b5;
+        color: white;
+        margin-right: 20px;
+      }
+      .delete {
+        background-color: red;
+        color: white;
+      }
+    }
+  }
+
+  :host {
+     ::ng-deep .mat-mdc-text-field-wrapper {
+      border: 3px solid black;
+    }
+    ::ng-deep .mat-mdc-progress-spinner {
+      --mdc-circular-progress-active-indicator-color: #000000;
+    }
+  }
+ 

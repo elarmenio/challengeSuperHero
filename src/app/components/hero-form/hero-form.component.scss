@@ -1,0 +1,79 @@
+.container{
+    width: 500px;
+    height: 545px;
+    background-image: url('../../../assets/background.png');
+    overflow: auto;
+    padding: 20px;
+    border: 4px solid black;
+    
+    mat-label.required-label::after {
+        content: " *";
+        color: #ff0000;
+    }
+    .text-danger {
+        color: #ff0000;
+        background: black;
+        font-size: 14px;
+    }
+
+    .form-custom {
+        display: flex;
+        width: 100%;
+        flex-wrap: wrap;
+        flex-direction: column;
+        margin-top: 12px;
+    }
+
+    .header {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        color: white;
+        background-color: #4647f2;
+        align-items: center;
+    }
+
+    .h2Title {
+        margin-left: 15px;
+    }
+
+    .content-buttons{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+
+        .save {
+            width: 48%;
+            color: white;
+            background-color: #3f51b5;
+        }
+        .cancel {
+            background-color: white;
+            color: black;
+            width: 48%;
+        }
+    }
+}
+
+:host {
+    ::ng-deep .mat-mdc-text-field-wrapper {
+     border: 3px solid black;
+   }
+   ::ng-deep .mat-mdc-progress-spinner {
+     --mdc-circular-progress-active-indicator-color: #000000;
+   }
+
+   ::ng-deep input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none !important;
+    display: none !important;
+  }
+  
+  ::ng-deep input[type='number'] {
+    -webkit-appearance: none !important;
+    margin: 0 !important; 
+  }
+
+  ::ng-deep .mat-mdc-button[disabled], .mat-mdc-unelevated-button[disabled], .mat-mdc-raised-button[disabled], .mat-mdc-outlined-button[disabled] {
+    background-color: #a2a2a2 !important;
+  }
+ }

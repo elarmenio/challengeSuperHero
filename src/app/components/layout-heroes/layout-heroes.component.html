@@ -1,0 +1,18 @@
+<div class="container">
+    <mat-toolbar color="primary" class="header">
+        <mat-toolbar-row>
+          <a class="logo" mat-icon-button href="https://www.marvel.com/" target="_blank">
+            <img src="../../../assets/marvel.png" fill priority class="img"/>
+          </a>
+          <h2>{{title | uppercase }}</h2>
+          <a mat-icon-button href="https://www.marvel.com/characters" target="_blank" matTooltip="Marvel characters">
+            <span class="material-symbols-outlined">domino_mask</span>
+          </a>
+        </mat-toolbar-row>
+      </mat-toolbar>
+    <div class="content">
+      <app-hero-list>
+      </app-hero-list>
+    </div> 
+  </div>
+  
