@@ -92,7 +92,7 @@ export class HeroListComponent implements OnInit {
   editAddHero(hero?: SuperHero | any, isEdit?: boolean){
     let title = 'New character';
     if(isEdit){
-      title = 'Editing the character' + hero?.name
+      title = 'Editing the character ' + hero?.name
     }
     let dialogRef = this.dialog.open<HeroFormComponent>(HeroFormComponent, {
       data: {
@@ -108,8 +108,10 @@ export class HeroListComponent implements OnInit {
           this.services.addHeroEdit(result.value);
           this.getAllHeroes();
           this.loading = false;
-        }, 1000);
-      }this.loading = false;
+        }, 2000);
+      }else {
+        this.loading = false;
+      }
     })
   }
 }
