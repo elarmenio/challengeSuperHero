@@ -102,9 +102,14 @@ export class HeroListComponent implements OnInit {
       }
     });
     dialogRef.afterClosed().subscribe((result)=>{
+      this.loading = true;
       if(result){
-        this.services.addHeroEdit(result.value);
-        this.getAllHeroes();
+        setTimeout(() => {
+          this.services.addHeroEdit(result.value);
+          this.getAllHeroes();
+          this.loading = false;
+        }, 1000);
+        
       }
     })
   }
