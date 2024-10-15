@@ -35,7 +35,7 @@ export class HeroFormComponent implements OnInit {
   onNameBlur() {
     const nameControl = this.form.get('name');
     if (nameControl) {
-      nameControl.setValue(nameControl.value.toUpperCase()); // Convierte a mayúsculas
+      nameControl.setValue(nameControl.value.toUpperCase());
     }
   }
 

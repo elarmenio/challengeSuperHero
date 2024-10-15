@@ -109,8 +109,7 @@ export class HeroListComponent implements OnInit {
           this.getAllHeroes();
           this.loading = false;
         }, 1000);
-        
-      }
+      }this.loading = false;
     })
   }
 }
