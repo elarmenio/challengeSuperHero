@@ -98,12 +98,9 @@ export class HeroListComponent implements OnInit {
 
   editAddHero(hero?: SuperHero | any, isEdit?: boolean) { 
     let title = 'New character';
-    if (isEdit) {
-      title = 'Editing the character ' + hero?.name;
-    }
     let dialogRef = this.dialog.open<HeroFormComponent>(HeroFormComponent, {
       data: {
-        title: title,
+        title: isEdit ? 'Editing the character ' + hero?.name : title,
         infoHero: hero || null,
         isEdit: isEdit
       }
