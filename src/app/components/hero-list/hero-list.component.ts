@@ -23,7 +23,7 @@ export class HeroListComponent implements OnInit {
   public pageSize: number = 5; 
 
   constructor(
-      private services: SuperheroService
+      public services: SuperheroService
    ,  private dialog : MatDialog
    ,  private toastServices : ToastrService
   ) {}
@@ -32,12 +32,19 @@ export class HeroListComponent implements OnInit {
     this.getAllHeroes();
   }
 
-  getAllHeroes(){
-    this.services.getAllHeroes().subscribe((heroes) => {
-      this.heroesList = heroes;
-      this.filteredHeroes = heroes; 
-      this.updatePaginatedHeroes(0, this.pageSize); 
-    });
+  getAllHeroes() {
+    this.services.setLoading(true);
+    this.services.getAllHeroes().subscribe(
+      (heroes) => {
+        this.heroesList = heroes;
+        this.filteredHeroes = heroes;
+        this.updatePaginatedHeroes(0, this.pageSize)
+        this.services.setLoading(false);
+      },
+      (error) => {
+        this.services.setLoading(false);
+      }
+    );
   }
 
   gethero() {
@@ -89,29 +96,33 @@ export class HeroListComponent implements OnInit {
     });
   }
 
-  editAddHero(hero?: SuperHero | any, isEdit?: boolean){
+  editAddHero(hero?: SuperHero | any, isEdit?: boolean) { 
     let title = 'New character';
-    if(isEdit){
-      title = 'Editing the character ' + hero?.name
+    if (isEdit) {
+      title = 'Editing the character ' + hero?.name;
     }
     let dialogRef = this.dialog.open<HeroFormComponent>(HeroFormComponent, {
       data: {
-        title : title,
+        title: title,
         infoHero: hero || null,
         isEdit: isEdit
       }
     });
-    dialogRef.afterClosed().subscribe((result)=>{
-      this.loading = true;
-      if(result){
-        setTimeout(() => {
-          this.services.addHeroEdit(result.value);
-          this.getAllHeroes();
-          this.loading = false;
-        }, 2000);
-      }else {
-        this.loading = false;
+    dialogRef.afterClosed().subscribe((result) => {
+      this.services.setLoading(true); 
+      if (result) {
+        this.services.addHeroEdit(result.value).subscribe({
+          next: () => {
+            this.getAllHeroes();
+            this.services.setLoading(false);
+          },
+          error: () => {
+            this.services.setLoading(false);
+          }
+        });
+      } else {
+        this.services.setLoading(false);
       }
-    })
+    });
   }
 }
