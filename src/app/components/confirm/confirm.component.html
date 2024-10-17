@@ -1,19 +1,19 @@
 <div class="dialog-confirm">
     <mat-toolbar class="header">
-        <h6 mat-dialog-title>{{ title }}</h6>
+        <h6 mat-dialog-title>{{ title() }}</h6>
         <button mat-icon-button mat-dialog-close>
             <mat-icon>close</mat-icon>
         </button>
     </mat-toolbar>
     <mat-dialog-content class="dialogContent">
-        {{ message }}
+        {{ message() }}
     </mat-dialog-content>
     <mat-dialog-actions class="content-buttons">
         <button cdkFocusInitial mat-raised-button class="cancel" [mat-dialog-close]="false">
             Cancel
         </button>
         <button mat-raised-button [mat-dialog-close]="true" color="primary" class="save">
-            {{ acceptLabel }}
+            {{ acceptLabel() }}
         </button>
     </mat-dialog-actions>
 </div>

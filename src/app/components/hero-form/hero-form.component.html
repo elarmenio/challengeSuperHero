@@ -1,61 +1,55 @@
 <div class="container">
-    <div class="header">
-        <h2 class="h2Title">{{title | uppercase}}</h2>
-        <button aria-label='close' mat-icon-button (click)="dismiss()">
-            <span class="material-symbols-outlined">close</span>
-        </button>
-    </div>
-    
-    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-custom">
-        <mat-form-field appearance="fill" floatLabel="always">
-            <mat-label [ngClass]="{'required-label': form.get('id')?.invalid }">ID</mat-label>
-            <input matInput formControlName="id" type="number" appUppercase id="id"/>
-            <mat-error *ngIf="form.get('id')?.invalid && 
-            form.get('id')?.errors && 
-              (form.get('id')?.dirty || form.get('id')?.touched)">
-              <span class="text-danger">
-                REQUIRED
-              </span>
-            </mat-error>
-          </mat-form-field>
+  <div class="header">
+      <h2 class="h2Title">{{ titleSignal() | uppercase }}</h2>
+      <button aria-label='close' mat-icon-button (click)="dismiss()">
+          <span class="material-symbols-outlined">close</span>
+      </button>
+  </div>
+  
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-custom">
+      <mat-form-field appearance="fill" floatLabel="always">
+          <mat-label [ngClass]="{'required-label': form.get('id')?.invalid }">ID</mat-label>
+          <input matInput formControlName="id" type="number" appUppercase id="id"/>
+          <mat-error *ngIf="form.get('id')?.invalid && 
+          form.get('id')?.errors && 
+            (form.get('id')?.dirty || form.get('id')?.touched)">
+            <span class="text-danger">REQUIRED</span>
+          </mat-error>
+      </mat-form-field>
 
-          <mat-form-field appearance="fill" floatLabel="always">
-            <mat-label [ngClass]="{'required-label': form.get('name')?.invalid }">Name</mat-label>
-            <input matInput formControlName="name" type="text" id="name" (blur)="onNameBlur()"/>
-            <mat-error *ngIf="form.get('name')?.invalid && 
-            form.get('name')?.errors && 
-              (form.get('name')?.dirty || form.get('name')?.touched)">
-              <span class="text-danger">
-                REQUIRED
-              </span>
-            </mat-error>
-          </mat-form-field>
+      <mat-form-field appearance="fill" floatLabel="always">
+          <mat-label [ngClass]="{'required-label': form.get('name')?.invalid }">Name</mat-label>
+          <input matInput formControlName="name" type="text" id="name" (blur)="onNameBlur()"/>
+          <mat-error *ngIf="form.get('name')?.invalid && 
+          form.get('name')?.errors && 
+            (form.get('name')?.dirty || form.get('name')?.touched)">
+            <span class="text-danger">REQUIRED</span>
+          </mat-error>
+      </mat-form-field>
 
-          <mat-form-field appearance="fill" floatLabel="always">
-            <mat-label [ngClass]="{'required-label': form.get('power')?.invalid }">Power</mat-label>
-            <input matInput formControlName="power" type="text" id="power"/>
-            <mat-error *ngIf="form.get('power')?.invalid && 
-            form.get('power')?.errors && 
-              (form.get('power')?.dirty || form.get('power')?.touched)">
-              <span class="text-danger">
-                REQUIRED
-              </span>
-            </mat-error>
-          </mat-form-field>
+      <mat-form-field appearance="fill" floatLabel="always">
+          <mat-label [ngClass]="{'required-label': form.get('power')?.invalid }">Power</mat-label>
+          <input matInput formControlName="power" type="text" id="power"/>
+          <mat-error *ngIf="form.get('power')?.invalid && 
+          form.get('power')?.errors && 
+            (form.get('power')?.dirty || form.get('power')?.touched)">
+            <span class="text-danger">REQUIRED</span>
+          </mat-error>
+      </mat-form-field>
 
-          <mat-form-field appearance="fill" floatLabel="always">
-            <mat-label>Description</mat-label>
-            <input matInput formControlName="description" type="text" id="description"/>
-          </mat-form-field>
+      <mat-form-field appearance="fill" floatLabel="always">
+          <mat-label>Description</mat-label>
+          <input matInput formControlName="description" type="text" id="description"/>
+      </mat-form-field>
 
-          <mat-form-field appearance="fill" floatLabel="always">
-            <mat-label>Image (Add the URL of the image you want to be visualize)</mat-label>
-            <input matInput formControlName="image" type="text"  id="image"/>
-          </mat-form-field>
+      <mat-form-field appearance="fill" floatLabel="always">
+          <mat-label>Image (Add the URL of the image you want to be visualize)</mat-label>
+          <input matInput formControlName="image" type="text" id="image"/>
+      </mat-form-field>
 
-          <div class="content-buttons">
-            <button mat-raised-button color="primary" (click)="dismiss()" class="cancel">Cancel</button>
-            <button type="submit" mat-raised-button color="primary" [disabled]="form.invalid" class="save">Save</button>
-          </div>
-    </form>
+      <div class="content-buttons">
+          <button mat-raised-button color="primary" (click)="dismiss()" class="cancel">Cancel</button>
+          <button type="submit" mat-raised-button color="primary" [disabled]="form.invalid" class="save">Save</button>
+      </div>
+  </form>
 </div>

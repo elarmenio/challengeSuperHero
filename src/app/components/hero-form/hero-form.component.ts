@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AddEditSuperHero } from 'src/app/interfaces/SuperHero.interface';
@@ -10,19 +10,24 @@ import { AddEditSuperHero } from 'src/app/interfaces/SuperHero.interface';
 })
 export class HeroFormComponent implements OnInit {
   public form!: FormGroup;
-  public title : string = '';
+  public titleSignal = signal('');
+  public isFormValidSignal = signal(false);
+
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: AddEditSuperHero
-    , private dialogRef: MatDialogRef<HeroFormComponent>
-    , private fb: FormBuilder
-  ) { }
+    @Inject(MAT_DIALOG_DATA) public data: AddEditSuperHero,
+    private dialogRef: MatDialogRef<HeroFormComponent>,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit() {
-    this.title = this.data.title;
-    this.inicializeForm();
+    this.titleSignal.set(this.data.title);
+    this.initializeForm();
+    this.form.valueChanges.subscribe(() => {
+      this.isFormValidSignal.set(this.form.valid);
+    });
   }
 
-  inicializeForm() {
+  initializeForm() {
     this.form = this.fb.group({
       id: [{ value: this.data.isEdit ? this.data.infoHero?.id : null, disabled: this.data.isEdit }, Validators.required],
       name: [this.data.isEdit ? this.data.infoHero?.name.toUpperCase() : null, Validators.required],
@@ -31,7 +36,7 @@ export class HeroFormComponent implements OnInit {
       image: [this.data.isEdit ? this.data.infoHero?.image : '']
     });
   }
-  
+
   onNameBlur() {
     const nameControl = this.form.get('name');
     if (nameControl) {
@@ -41,20 +46,18 @@ export class HeroFormComponent implements OnInit {
 
   onSubmit(): void {
     if (this.form.valid) {
-      let form = {
+      const formData = {
         id: this.form.get('id')?.value,
-        name :this.form.get('name')?.value,
+        name: this.form.get('name')?.value,
         power: this.form.get('power')?.value,
         description: this.form.get('description')?.value,
-        image :this.form.get('image')?.value,
-      }
-      this.dialogRef.close({
-        value: form
-      });
+        image: this.form.get('image')?.value,
+      };
+      this.dialogRef.close({ value: formData });
     }
   }
 
-  dismiss(){
+  dismiss() {
     this.dialogRef.close();
   }
 }
