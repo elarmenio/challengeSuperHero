@@ -1,49 +1,48 @@
 <div class="hero-list">
-    <mat-form-field appearance="fill">
-      <mat-label>Seleccionar criterio de búsqueda</mat-label>
-      <mat-select [(ngModel)]="searchType" (ngModelChange)="gethero()">
-        <mat-option value="id">Id</mat-option>
-        <mat-option value="name">Name</mat-option>
-        <mat-option value="all">All characteristics</mat-option>
-      </mat-select>
-    </mat-form-field>
-  
-    <mat-form-field appearance="fill">
-      <mat-label>Search</mat-label>
-      <input matInput [(ngModel)]="searchTerm" placeholder="Enter the characteristic of your character you want to search" (ngModelChange)="gethero()" />
-    </mat-form-field>
-    <div class="contentButtonsSearchAdd">
-        <button mat-raised-button color="primary" (click)="gethero()" class="buttonSearch">Search</button>
-    
-        <button mat-raised-button color="primary" (click)="editAddHero({}, false)" class="buttonAdd">Add hero</button>
-    </div>
-    
+  <mat-form-field appearance="fill">
+    <mat-label>Seleccionar criterio de búsqueda</mat-label>
+    <mat-select [(ngModel)]="searchType" (ngModelChange)="gethero()">
+      <mat-option value="id">Id</mat-option>
+      <mat-option value="name">Name</mat-option>
+      <mat-option value="all">All characteristics</mat-option>
+    </mat-select>
+  </mat-form-field>
 
-    <div *ngIf="services.loading$ | async" class="loading-indicator">
-      <mat-spinner></mat-spinner>
-    </div>
-  
-    <div *ngIf="!loading && filteredHeroes.length === 0" class="notFound">
-      No heroes were found.
-    </div>
-  
-    <div *ngIf="!loading" class="cards">
-      <mat-card *ngFor="let hero of paginatedHeroes" class="hero-card">
-        <mat-card-header>
-          <mat-card-title>{{ hero.name | uppercase }} (ID: {{ hero.id }})</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <img [src]="hero.image" alt="{{ hero.name }}" style="width: 100%; height: auto;" />
-          <p><strong>Power:</strong> {{ hero.power }}</p>
-          <p><strong>Description: </strong> {{ hero.description }}</p>
-          <div class="content-buttons">
-            <button mat-button (click)="editAddHero(hero, true)" class="edit">Edit</button>
-            <button mat-button color="warn" (click)="showCancelConfirm(hero.id)" class="delete">Delete</button>
-          </div>
-        </mat-card-content>
-      </mat-card>
-    </div>
-  
-    <mat-paginator [length]="filteredHeroes.length" [pageSize]="5" (page)="changePage($event)" class="paginator"></mat-paginator>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Search</mat-label>
+    <input matInput [(ngModel)]="searchTerm" placeholder="Enter the characteristic of your character you want to search" (ngModelChange)="gethero()" />
+  </mat-form-field>
+
+  <div class="contentButtonsSearchAdd">
+    <button mat-raised-button color="primary" (click)="gethero()" class="buttonSearch">Search</button>
+    <button mat-raised-button color="primary" (click)="editAddHero({}, false)" class="buttonAdd">Add hero</button>
+  </div>
+
+  <div *ngIf="services.loading$ | async" class="loading-indicator">
+    <mat-spinner></mat-spinner>
   </div>
   
+  <div *ngIf="!(services.loading$ | async) && filteredHeroes.length === 0" class="notFound">
+    No heroes were found.
+  </div>
+
+  <div *ngIf="!(services.loading$ | async) && filteredHeroes.length > 0" class="cards">
+    <mat-card *ngFor="let hero of paginatedHeroes" class="hero-card">
+      <mat-card-header>
+        <mat-card-title>{{ hero.name | uppercase }} (ID: {{ hero.id }})</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <img [src]="hero.image" alt="{{ hero.name }}" style="width: 100%; height: auto;" />
+        <p><strong>Power:</strong> {{ hero.power }}</p>
+        <p><strong>Description: </strong> {{ hero.description }}</p>
+        <div class="content-buttons">
+          <button mat-button (click)="editAddHero(hero, true)" class="edit">Edit</button>
+          <button mat-button color="warn" (click)="showCancelConfirm(hero.id)" class="delete">Delete</button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <mat-paginator [length]="filteredHeroes.length" [pageSize]="5" (page)="changePage($event)" class="paginator"></mat-paginator>
+</div>

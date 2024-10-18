@@ -20,7 +20,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ToastrModule } from 'ngx-toastr';
 import { ConfirmComponent } from './components/confirm/confirm.component';
-import { SuperheroService } from './services/superhero.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LoadingInterceptor } from './interceptor/loading.interceptor';
 @NgModule({
@@ -52,12 +51,7 @@ import { LoadingInterceptor } from './interceptor/loading.interceptor';
     HttpClientModule
   ],
   providers: [
-    SuperheroService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: LoadingInterceptor,
-      multi: true
-    }
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

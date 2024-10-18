@@ -12,7 +12,10 @@ export class LoadingInterceptor implements HttpInterceptor {
     this.superheroService.setLoading(true);
     return next.handle(req).pipe(
       finalize(() => {
-        this.superheroService.setLoading(false);
+        setTimeout(() => {
+          this.superheroService.setLoading(false);
+        }, 3000);
+        
       })
     );
   }

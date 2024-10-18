@@ -2,7 +2,7 @@
   "heroes": [
     {
       "id": "1001",
-      "name": "CAPITÁN AMÉRICAAAAA",
+      "name": "CAPITÁN AMÉRICAAAA",
       "power": "Fuerza y agilidad sobrehumanas",
       "description": "Un símbolo de patriotismo y heroísmo, Capitán América lucha por la justicia y la libertad, liderando a los Vengadores con su indestructible escudo.",
       "image": "https://i0.wp.com/imgs.hipertextual.com/wp-content/uploads/2019/04/hipertextual-que-estaria-fabricado-escudo-capitan-america-si-fuese-real-2019887960.jpg?resize=1200%2C799&quality=70&strip=all&ssl=1"
@@ -71,9 +71,16 @@
       "image": "https://www.hollywoodreporter.com/wp-content/uploads/2015/09/blade_still.jpg?w=2000&h=1126&crop=1"
     },
     {
-      "id": 212121,
+      "id": "212121",
       "name": "SDASDDA",
       "power": "asdasdsa",
+      "description": "",
+      "image": ""
+    },
+    {
+      "id": 31232,
+      "name": "WEWQEWQEW",
+      "power": "dsadasdsa",
       "description": "",
       "image": ""
     }

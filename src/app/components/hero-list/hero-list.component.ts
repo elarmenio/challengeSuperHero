@@ -33,38 +33,26 @@ export class HeroListComponent implements OnInit {
   }
 
   getAllHeroes() {
-    this.services.setLoading(true);
-    this.services.getAllHeroes().subscribe(
-      (heroes) => {
+    this.services.getAllHeroes().subscribe((heroes) => {
         this.heroesList = heroes;
         this.filteredHeroes = heroes;
-        this.updatePaginatedHeroes(0, this.pageSize)
-        this.services.setLoading(false);
-      },
-      (error) => {
-        this.services.setLoading(false);
+        this.updatePaginatedHeroes(0, this.pageSize);
       }
     );
   }
 
   gethero() {
-    this.loading = true;
-    setTimeout(() => {
-      this.filteredHeroes = this.heroesList.filter(hero => {
-        if (this.searchType === 'id') {
-          return hero.id.toString() === this.searchTerm;
-        } else if (this.searchType === 'name') {
-          return hero.name.toLowerCase().includes(this.searchTerm.toLowerCase());
-        } else {
-          return (
-            hero.id.toString() === this.searchTerm ||
-            hero.name.toLowerCase().includes(this.searchTerm.toLowerCase())
-          );
-        }
-      });
-      this.updatePaginatedHeroes(0, this.pageSize);
-      this.loading = false;
-    }, 1000);
+    this.filteredHeroes = this.heroesList.filter(hero => {
+      if (this.searchType === 'id') {
+        return hero.id.toString() === this.searchTerm;
+      } else if (this.searchType === 'name') {
+        return hero.name.toLowerCase().includes(this.searchTerm.toLowerCase());
+      } else {
+        return ( hero.id.toString() === this.searchTerm ||
+          hero.name.toLowerCase().includes(this.searchTerm.toLowerCase()));
+      }
+    });
+    this.updatePaginatedHeroes(0, this.pageSize);
   }
 
   changePage(event: PageEvent) {
@@ -106,19 +94,12 @@ export class HeroListComponent implements OnInit {
       }
     });
     dialogRef.afterClosed().subscribe((result) => {
-      this.services.setLoading(true); 
       if (result) {
         this.services.addHeroEdit(result.value).subscribe({
           next: () => {
             this.getAllHeroes();
-            this.services.setLoading(false);
-          },
-          error: () => {
-            this.services.setLoading(false);
           }
         });
-      } else {
-        this.services.setLoading(false);
       }
     });
   }
